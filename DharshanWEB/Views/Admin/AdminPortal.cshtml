@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "AdminPortal";
+}
+
+
+<h2>AdminPortal</h2>
+@* Modal Window *@
+<div class="modal" tabindex="-1" role="dialog" id="myModal">
+    <link rel="stylesheet" href="~/Content/Style/AdminPortalCSS.css" />
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Customer Data</h5>
+                <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="intercust" method="post">
+                    <table class="modal-table">
+                        <tbody>
+                            <tr>
+                                <td>Organization ID:</td>
+                                <td><input type="text" value="" id="Sno_id" name="Sno_id" readonly /></td>
+                            </tr>
+                            <tr>
+                                <td> Name:</td>
+                                <td><input type="text" value="" id="name_rsm" name="name_rsm" /></td>
+                            </tr>
+                            <tr>
+                                <td>E-mail:</td>
+                                <td><input type="text" value="" id="email_rsm" name="email_rsm" /></td>
+                            </tr>
+                            <tr>
+                                <td>Subject:</td>
+                                <td><input type="text" value="" id="subject_rsm" name="subject_rsm" /></td>
+                            </tr>
+                            <tr>
+                                <td>Message:</td>
+                                <td><input type="text" value="" id="message_rsm" name="message_rsm" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btn_model_save">Save changes</button>
+                <button type="button" class="btn btn-secondary modal-close" id="close_nation" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-bordered table-hover table-striped" id="national_cust">
+    <thead class="table-light">
+        <tr>
+            <th>Organization ID</th>
+            <th> Name</th>
+            <th>E-mail</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.Customer != null)
+        {
+            foreach (var obj in ViewBag.Customer)
+            {
+                <tr>
+                    <td>@obj["name_rsm"]</td>
+                    <td>@obj["email_rsm"]</td>
+                    <td>@obj["subject_rsm"]</td>
+                    <td>@obj["message_rsm"]</td>                   
+                    <td class="text-center">
+                        <div class="action-icons">
+                            <i class="bi bi-pencil-square text-primary btn-edit" id="@obj["Sno"]"></i>
+                            <i class="bi bi-trash3 text-danger btn-del" id="@obj["Sno"]"></i>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<script>
+    const table = new DataTable('#intercust', {
+        pagingType: 'full_numbers',
+        pageLength: 25,
+        order: []
+    });
+</script>
